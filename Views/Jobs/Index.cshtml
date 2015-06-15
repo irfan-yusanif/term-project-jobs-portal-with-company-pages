@@ -1,0 +1,261 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var resutls = ViewBag.data;
+    var locations = ViewBag.locations;
+    var experience = ViewBag.experience;
+    var type = ViewBag.type;
+    var career = ViewBag.career;
+    var category = ViewBag.category;
+    var company = ViewBag.company;
+    var add = ViewBag.add;
+}
+@model adminlte.Models.comany_ad
+@*<script>
+    function fun(va) {
+        var url = "~/Jobs/Index?str=" + va;
+        $.getJSON(url, null, function (data) {
+            @{
+                ViewBag.Title = "Index";
+                var resutls = ViewBag.data;
+                var locations = ViewBag.locations;
+                var experience = ViewBag.experience;
+                var type = ViewBag.type;
+                var career = ViewBag.career;
+                var category = ViewBag.category;
+                var company = ViewBag.company;
+                var add = ViewBag.add;
+                
+                
+                
+            }
+            @{int count = 0;}
+@foreach (var ads in resutls)
+            {
+                count++;
+
+
+
+             var abc=   <div class="single-profile wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <div class="media">
+                        <div class="media-body">
+                            
+                            <h4><a href="~/Jobs/show_ad?id=@ads.Id">@ads.title</a></h4>
+                            <h5>
+                                @ads.description
+                            </h5>
+
+                            <div class="entry-meta small muted">
+                Category: @ads.category
+            </div>
+
+        </div>
+    </div>
+    <!--/.media -->
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+                Time:@ads.time
+            </div>
+            <div class="col-sm-4">
+                Location:@ads.city
+            </div>
+            <div class="col-sm-4">
+                <div class="pull-right">
+                Salary:@ads.salary
+            </div>
+        </div>
+    </div>
+
+</div>
+
+            }
+@if (count == 0)
+{
+    <p>No ads found</p>
+}
+        });
+    }
+    $(document).ready(function () {
+        //$(function () {
+        //    var search = $('#search');
+        //    search.change(function () {
+        //        var abc = search.val();
+        //        alert(abc);
+        //    });
+        function fun() {
+            var search = $("#search");
+            
+            alert(search.val());
+        }
+    });
+
+
+</script>*@
+
+<div class="content-wrapper">
+    <div class="container">
+        <section style="margin:40px auto">
+            <div class="row">
+                <div class="col-md-offset-3">
+                    <h2 style="">search Jobs</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-4">
+                    <form action="~/Jobs/Index">
+                        <input class="form-control" onkeyup="fun(this.value)" name="title" type="text" id="search" placeholder="search jobs" />
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Search filtering by</h5>
+                    <div class="well">
+                        @if (add.title != null) { 
+    <a>Title :</a> @add.title<br />;
+                        }
+                        @if (add.category != null)
+                        {
+                            <a>Category : </a>@add.category<br />;
+                        }
+                            @if (add.location != null) { 
+                                <a>Location : </a>@add.location<br />;
+                            }
+                            @if (add.experience != null)
+                            {
+                                <a>experience : </a>@add.experience<br />;
+                            }
+                            @if (add.gender != null)
+                            {
+                                <a>gender : </a>@add.gender<br />;
+                            }
+                            @if (add.shift != null)
+                            {
+                                <a>shift : </a>@add.shift<br />;
+                            }
+                            @if (add.type != null)
+                            {
+                                <a>type : </a>@add.type<br />;
+                            }
+                            @if (add.career_level != null)
+                            {
+                                <a>Career level : </a>@add.career_level<br />;
+                            }
+                            @if (add.company_id != null)
+                            {
+                                
+                                <a>Company : </a>@ViewBag.company_name <br />;
+                            }
+                    </div>
+                    <h4>Search by Cateogory</h4>
+                    <div class="list-group">
+                        @foreach (var cat in category)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_category?s=@cat">@cat</a>
+                        }
+                    </div>
+                    <h4>Search by location</h4>
+                    <div class="list-group">
+                        @foreach (var loc in locations)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_location?s=@loc">@loc</a>
+                        }
+                        
+                    </div>
+                    <h4>Search by experience</h4>
+                    <div class="list-group">
+                        @foreach (var exp in experience)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_experience?s=@exp">@exp</a>
+                        }
+                    </div>
+                    <h4>Search by Gender</h4>
+                    <div class="list-group">
+                        <a class="list-group-item" href="~/Jobs/set_job_gender?s=Male">Male</a>
+                        <a class="list-group-item" href="~/Jobs/set_job_gender?s=Female">Female</a>
+                        <a class="list-group-item" href="~/Jobs/set_job_gender?s=Does not matter">Does not matter</a>
+                    </div>
+                    <h4>Search by Shift</h4>
+                    <div class="list-group">
+                        <a class="list-group-item" href="~/Jobs/set_job_shift?s=Morning">Morning</a>
+                        <a class="list-group-item" href="~/Jobs/set_job_shift?s=Evening">Evening</a>
+                    </div>
+                    <h4>Search by Type</h4>
+                    <div class="list-group">
+                        @foreach (var t in type)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_type?s=@t">@t</a>
+                        }
+                    </div>
+                    <h4>Search by Career level</h4>
+                    <div class="list-group">
+                        @foreach (var car in career)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_type?s=@car">@car</a>
+                        }
+                    </div>
+                    <h4>Search by Company</h4>
+                    <div class="list-group">
+                        @foreach (var com in company)
+                        {
+                            <a class="list-group-item" href="~/Jobs/set_job_company?id=@com.Id">@com.name</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6" style="margin-top:20px;">
+                    <div class="team">
+                        <div class="row margin clearfix">
+                            @{int count = 0;}
+@foreach (var ads in resutls)
+{
+    count++;
+
+
+
+    <div class="single-profile wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <div class="media">
+            <div class="media-body">
+                @*@Html.ActionLink("Need php developer", "~/Jobs/show_ad", new { id = 8 });*@
+                <h4><a href="~/Jobs/show_ad?id=@ads.Id">@ads.title</a></h4>
+                <h5>
+                    @ads.description
+                </h5>
+
+                <div class="entry-meta small muted">
+                    Category: @ads.category
+                </div>
+
+            </div>
+        </div>
+        <!--/.media -->
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                Time:@ads.time
+            </div>
+            <div class="col-sm-4">
+                Location:@ads.city
+            </div>
+            <div class="col-sm-4">
+                <div class="pull-right">
+                    Salary:@ads.salary
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+@if (count == 0)
+{
+    <p>No ads found</p>
+}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

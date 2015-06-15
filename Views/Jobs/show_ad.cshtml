@@ -1,0 +1,292 @@
+﻿@{
+    ViewBag.Title = "show_ad";
+    var error = ViewBag.message;
+    int reported_count = ViewBag.reported;
+}
+<style>
+    table *{
+        padding:4px;
+        border-bottom:1px solid gray;
+    }
+</style>
+
+
+<div class="content-wrapper">
+    <div class="container">
+        <section style="margin-top:80px">
+
+            @if (error == "record not found")
+            {
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i>
+
+                    
+                        <h4>
+                            This ad has been deleted or is unavailable.
+                        </h4>
+                    
+                </div>
+            }
+            else
+            {
+
+                @model adminlte.Models.comany_ad
+                var user = ViewBag.data;
+                var isadmin = TempData["admin"];
+                if (error != null)
+                {
+
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-coffee"></i>
+                        
+                        @if (error == "no_permission")
+                        {
+                            <h4>
+                                You don't have permission to access this page.
+                            </h4>
+                        }
+                        else if (error == "no_delete_permission")
+                        {
+                            <h4>
+                                You don't have permission to delete this page.
+                            </h4>
+                        }
+                        else if (error == "already reported")
+                        {
+                            <h4>
+                                You have already reported this ad.
+                            </h4>
+                        }
+                        else if (error == "login to report")
+                        {
+                            <h4>
+                                You must be logged in to reported this ad.
+                            </h4>
+                        }
+                    </div>
+
+                    @*<div class="alert alert-block">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            @if(error == "no_permission"){
+                                    <h4>You don't have permission to access this page.
+                                    </h4>
+                            }
+                        </div>*@
+                }
+                <div class="blog">
+                    <div class="blog-item">
+                        <div class="row pull-right" style="margin-right:5px;">
+                            @if(Session["user"] != null){
+                                int id = (int)Session["user"];
+                                if(id == user.Id || isadmin=="yes"){
+                                    <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                    Actions
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    @if (isadmin != "yes") { 
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="~/Jobs/edit_company_job?id=@Model.Id">Edit</a></li>
+                                        }
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="" data-toggle="modal" data-target="#confirm_delete">Delete</a></li>
+                                    @if (isadmin == "yes") { 
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#confirm_block">Block user</a></li>
+                                        }
+                                </ul>
+                            </div>
+                            <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Report Ad</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to Delete this ad?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <a href="~/Jobs/delete_ad?id=@Model.Id" class="btn btn-primary">Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="confirm_block" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Report Ad</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to Block this user?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                            <button type="button" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                }
+                            }
+                            
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-3 text-center">
+                                        <div class="entry-meta ">
+                                            <span id="publish_date">@Model.time</span>
+                                            <span><i class="fa fa-user"></i> <a href="#" data-toggle="modal" data-target="#myModal"> Report (@reported_count)</a></span>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Report Ad</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to report this ad?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                    <a href="~/Jobs/report_ad?id=@Model.Id"  class="btn btn-primary">Yes</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-9 blog-content">
+                                        <h2>@Model.title</h2>
+                                        <div class="team">
+                                            <div class="row clearfix">
+                                                <div class="col-sm-10 col-sm-offset-1">
+
+                                                    <div class="table table-responsive table-striped">
+                                                        <table>
+                                                            <tr>
+                                                                <td>Company name</td>
+                                                                <td>@Model.company_name</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Category</td>
+                                                                <td>@Model.category</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>seats</td>
+                                                                <td>@Model.seats</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>qualification</td>
+                                                                <td>@Model.qualification</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Experience</td>
+                                                                <td>@Model.experience</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gender</td>
+                                                                <td>@Model.gender</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Skills required</td>
+                                                                <td>@Model.skills</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Last date to apply </td>
+                                                                <td>@Model.apply_before</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Job Type </td>
+                                                                <td>@Model.type</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Shift timming</td>
+                                                                <td>@Model.shift</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Salary</td>
+                                                                <td>@Model.salary</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>City</td>
+                                                                <td>@Model.city</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Location</td>
+                                                                <td>@Model.location</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+
+                                                    @*<div class="single-profile padding wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                                        Company name <div class="pull-left">@Model.company_name</div><hr />
+                                                        Category <div class="pull-right">@Model.category</div><hr />
+                                                        seats <div class="pull-right">@Model.seats</div><hr />
+                                                        qualification <div class="pull-right">@Model.qualification</div><hr />
+                                                        Experience <div class="pull-right">@Model.experience</div><hr />
+                                                        Gender <div class="pull-right">@Model.gender</div><hr />
+                                                        Skills required <div class="pull-right">@Model.skills</div><hr />
+                                                        Last date to apply <div class="pull-right">@Model.apply_before</div><hr />
+                                                        Job Type <div class="pull-right">@Model.type</div><hr />
+                                                        Shift timming <div class="pull-right">@Model.shift</div><hr />
+                                                        Salary <div class="pull-right">@Model.salary</div><hr />
+                                                        City <div class="pull-right">@Model.city</div><hr />
+                                                        Location <div class="pull-right">@Model.location</div>
+                                                    </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="entry-meta">Ad posted by</div>
+                                        <div class="widget categories">
+
+                                            <a href="~/User/Index?id=@Model.posted_by">
+                                                <div class="single_comments">
+                                                    <img src="~/Files/@(user.Id+".jpg")" width="50" height="50" alt="" />
+                                                    <p>@user.name</p>
+                                                    <div class="entry-meta small muted">
+                                                        @user.user_location
+                                                    </div>
+                                                </div>
+
+                                            </a>
+
+
+                                        </div><!--/.recent comments-->
+
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h2>Description</h2>
+                                        <p>@Model.description</p>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <!--<div class="single-profile"></div>-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+        </section>
+    </div>
+</div>

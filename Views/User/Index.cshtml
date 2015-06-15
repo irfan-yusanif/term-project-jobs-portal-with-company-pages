@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var active_ads = ViewBag.active_ads;
+    var msg = TempData["message"];
+    var companies = ViewBag.companies;
+}
+@model adminlte.Models.User
+
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-xs-10">
+                       
+                        <div class="">
+                            <!--well panel panel-default-->
+                            <div class="panel-body">
+                                <section style="margin:30px auto">
+                                    <div class="row">
+                                        @if (msg == "successfully_deleted")
+                                        {
+                                            <div class="alert alert-info alert-dismissable">
+                                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                                <i class="fa fa-coffee"></i>
+                                                <h4>successfully deleted!</h4>
+                                            </div>
+                                        }
+                                        
+                                        <div class="col-xs-12 col-sm-4 text-center">
+                                            <img src="@("/Files/u"+Model.Id+".jpg")" width="200" height="200" alt="" class="center-block img-circle img-thumbnail img-responsive" />
+
+                                        </div>
+                                        <!--/col-->
+                                        <div class="col-xs-12 col-sm-8">
+                                            <h2>@Model.name</h2>
+                                            <p><strong>About: </strong> @Model.about </p>
+                                            <p><strong>Member since:</strong>@Model.member_since</p>
+                                            <p><strong>From: </strong> @Model.user_location </p>
+                                        </div>
+                                        <!--/col-->
+                                        <!--/row-->
+                                    </div>
+                                </section>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#home" role="tab" data-toggle="tab">Active ads</a></li>
+                                    
+                                    <li><a href="#pages" role="tab" data-toggle="tab">Pages</a></li>
+@if (Session["user"] != null)
+                                            {
+                                                if ((int)Session["user"] == Model.Id)
+                                                {
+                                    <li><a href="#notifications" role="tab" data-toggle="tab">Notifications</a></li>
+}
+}
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="home" style="margin-top:20px;">
+                                        <div class="team">
+                                            <div class="row margin clearfix">
+                                                @{int count = 0;}
+                                                   @foreach (var ads in active_ads)
+                                                   {
+                                                   count++;
+                                               
+                                                       
+                                                       
+                                                    <div class="single-profile wow fadeInDown animated" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                                        <div class="media">
+                                                            <div class="media-body">
+                                                                @*@Html.ActionLink("Need php developer", "~/Jobs/show_ad", new { id = 8 });*@
+                                                                <h4><a href="~/Jobs/show_ad?id=@ads.Id">@ads.title</a></h4>
+                                                                <h5>
+                                                                    @ads.description
+                                                                </h5>
+
+                                                                <div class="entry-meta small muted">
+                                                                    Category: @ads.category
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!--/.media -->
+                                                        <hr>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                Time:@ads.time
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                Location:@ads.city
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="pull-right">
+                                                                    Salary:@ads.salary
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                
+                                                   }
+                                                   @if (count == 0)
+                                                   {
+                                                       <p>No ads found</p>
+                                                   }
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="tab-pane" id="pages">
+                                        <div class="row">
+                                            @{int count1 = 0;}
+                                           @foreach (var com in companies)
+                                           {
+                                               
+                                               count1++;
+                                               <div class="col-sm-6">
+                                                   
+                                                   <a href="../../Company/page?id=@com.Id">
+                                                       <img src="@("/Files/cc"+com.Id+".jpg")" width="150" height="150">
+                                                       <h3>@com.name</h3>
+                                                   </a>
+                                               </div>
+                                           }
+                                            @if (count1 == 0)
+                                            {
+                                                <p>No company pages found</p>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="notifications">
+                                        <div class="row" style="margin-top:30px;">
+                                            @if (Session["user"] != null)
+                                            {
+                                                if ((int)Session["user"] == Model.Id)
+                                                {
+                                                    int count2 = 0;
+                                            
+                                                if (ViewBag.notification != null)
+                                                {
+                                                    
+                                                    foreach (var noti in ViewBag.notification)
+                                                    {
+                                                        <a href="~/Jobs/show_ad?id=@noti.ad_id">
+                                                            <span class="well">@noti.company_name has posted a new job.</span>
+                                                        </a><br /><br /><br /><br />
+                                                        count2++;
+                                                        
+                                                    }
+                                                }
+                                            
+                                            
+                                            if (count2 == 0)
+                                            {
+                                                <p>No company pages found</p>
+                                            }
+                                                }
+                                            }
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/panel-body-->
+                        </div>
+                        <!--/panel-->
+                    </div>
+                    <!--/col-->
+                </div>
+                <!--/row-->
+                
+            </div>
+        </div>
+    

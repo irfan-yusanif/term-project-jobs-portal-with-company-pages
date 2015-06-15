@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "edit_company_job";
+}
+@model adminlte.Models.comany_ad
+<div class="content-wrapper">
+    <div class="container">
+        <section style="margin-top:50px">
+            <div class="row">
+                <div class="col-sm-offset-2">
+                    <h2> Edit Company job ad</h2>
+                </div>
+            </div>
+        </section>
+        <div class="row contact-wrap">
+            <form id="post" class="contact-form" name="contact-form" method="post" action="update_company_ad">
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-group">
+                        <label>Job Category</label>
+                        <div class="">
+
+                            <div class="">
+                                <select name="category" class="form-control" form="post">
+                                    <option value="It Jobs">
+                                        It Jobs
+                                    </option>
+                                    <option value="Business Administration">
+                                        Business Administration
+                                    </option>
+                                    <option value="Sales and marketing">
+                                        Sales and marketing
+                                    </option>
+                                    <option value="Management Jobs">
+                                        Management Jobs
+                                    </option>
+                                    <option value="other jobs">
+                                        other jobs
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Company</label>
+                        <input type="text" value="@Model.company_name" name="company_name" class="form-control">
+                    </div>
+                    <input type="hidden" name="company_id" value="@Model.company_id" />
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="form-group">
+                        <label>Post / Job title *</label>
+                        <input type="text" name="title" value="@Model.title" class="form-control" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label>Total seats </label>
+                        <input type="number" name="seats" value="@Model.seats" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Qualification *</label>
+                        <input type="text" name="qualification" value="@Model.qualification" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Experience</label>
+                                <div class="">
+
+                                    <div class="">
+                                        <select name="experience"  class="form-control" form="post">
+                                            <option value="Not required">
+                                                Not required
+                                            </option>
+                                            <option value="Fresh graduate">
+                                                Fresh graduate
+                                            </option>
+                                            <option value="1 year">
+                                                1 year
+                                            </option>
+                                            <option value="2 year">
+                                                2 year
+                                            </option>
+                                            <option value="3 year">
+                                                3 year
+                                            </option>
+                                            <option value="4 year">
+                                                4 year
+                                            </option>
+                                            <option value="5 year">
+                                                5 year
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div><label>Gender</label></div>
+                                <select name="gender" class="form-control" form="post">
+                                    <option value="Male">
+                                        Male
+                                    </option>
+                                    <option value="Female">
+                                        Female
+                                    </option>
+                                    <option value="Does not matter">
+                                        Does not matter
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Skills required *</label>
+                        <input type="text" name="skills" value="@Model.skills" class="form-control" required="required">
+                    </div>
+                    <div>
+                        <label>Career Level</label>
+                    </div>
+                    <div class="form-group">
+                        <select name="career_level" class="form-control" form="post">
+                            <option>Entry Level</option>
+                            <option>Student/Internship</option>
+                            <option>Mid Career</option>
+                            <option>Management</option>
+                            <option>Executive/Director</option>
+                            <option>Senior Executive(President,CEO)</option>
+                            <option>Unspecified</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Apply before * </label>
+                        <input type="date" name="apply_before" value="@Model.apply_before" class="form-control" required="required">
+                        no date limit
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div><label>Job type</label></div>
+
+                                <select name="type" class="form-control" form="post">
+                                    <option>Full time</option>
+                                    <option>Permanent</option>
+                                    <option>Contract</option>
+                                    <option>Internship</option>
+                                    <option>Part time</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div><label>Shift timing</label></div>
+
+                                <select name="shift" class="form-control" form="post">
+                                    <option>Morning shift</option>
+                                    <option>Evening shift</option>
+                                    <option>Not confirmed</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>City *</label>
+                        <input type="text" name="city" value="@Model.city" class="form-control" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" name="location" value="@Model.location" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>salary *</label>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="number" name="salary" value="@Model.salary" class="form-control" required="required">
+                                    <span class="input-group-addon">Rs</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+
+                                <select name="salary_type" class="form-control" form="post">
+                                    <option>
+                                        per hour
+                                    </option>
+                                    <option>
+                                        per day
+                                    </option>
+                                    <option>
+                                        per month
+                                    </option>
+                                    <option>
+                                        per year
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label>Description *</label>
+                        <textarea name="description"  required="required" class="form-control" rows="8">@Model.description</textarea>
+                    </div>
+                    <input type="hidden" name="posted_by" value="@Model.Id" />
+                    <div class="form-group">
+                        <button type="submit" name="submit" class="btn btn-primary btn-lg">Submit Ad</button>
+                    </div>
+
+                </div>
+            </form>
+        </div><!--/.row-->
+    </div>
+</div>

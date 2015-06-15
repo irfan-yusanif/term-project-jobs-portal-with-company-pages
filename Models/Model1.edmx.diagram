@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e29494d2def149b5ac944f2f1c0b913e" Name="Diagram1">
+        <EntityTypeShape EntityType="Database1Model.comany_ad" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.company" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Follow" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Notification" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Reported" PointX="5.25" PointY="11.25" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Review" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.User" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK_comany_ad_ToTable" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="Database1Model.FK_Reported_ToTable" />
+        <AssociationConnector Association="Database1Model.FK_company_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Follow_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Reviews_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Follow_ToTable_1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,65 @@
+﻿
+@model adminlte.Models.company
+<div class="content-wrapper">
+    <div class="container" style="padding-top: 60px;">
+        <h1 class="page-header">Edit Profile</h1>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="text-center">
+                    <a id="single_image" href="~/Files/cc@(Model.Id+".jpg")">
+                        <img src="~/Files/cc@(Model.Id+".jpg")" width="200" height="200" class=" img-thumbnail">
+                    </a>
+                    <h6>Upload  logo...</h6>
+                    <form action="../Company/save_img?id=@Model.Id&page=edit" method="post" enctype="multipart/form-data">
+                        <input type="file" name="image" class="text-center center-block well well-sm">
+                        <input type="submit" value="upload" />
+                    </form>
+                </div>
+            </div>
+
+            <!-- edit form column -->
+            <div class="col-md-8 col-sm-6">
+                @using (Html.BeginForm("update_page", "Company", FormMethod.Post))
+                {
+                    Html.HiddenFor(m => m.Id);
+                    Html.HiddenFor(m => m.made_by);
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.name)
+                        @Html.TextBoxFor(m => m.name, new { Class = "form-control", required = "required" })
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.about)
+                        @Html.TextBoxFor(m => m.about, new { @class = "form-control", required = "required" })
+                        @*@Html.EditorFor(m => m.about, new { @class = "form-control" })*@
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.website)
+                        @Html.TextBoxFor(m => m.website, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.location)
+                        @Html.TextBoxFor(m => m.location, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.employees)
+                        @Html.TextBoxFor(m => m.employees, new { @class = "form-control", required = "required" })
+                    </div>
+                    <input class="btn btn-primary" value="Save Changes" type="submit">
+
+    <a href="~/User/Index?id=@Model.made_by" class="btn btn-default">Cancel</a>
+                    @*<div class="form-group">
+                            @Html.LabelFor(m => m.password)
+                            @Html.PasswordFor(m => m.password)
+                        </div>*@
+                }
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+

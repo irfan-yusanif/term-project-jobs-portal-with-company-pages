@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "signup";
+
+   
+    
+}
+@model adminlte.Models.User
+
+<script>
+    function fun(value) {
+        var urll = '/User/check_email?s=' + value;
+        $.getJSON(urll, function (data) {
+            if (data) {
+                $("#error").text("This email is already taken");
+            }
+            else {
+                $("#error").text("");
+            }
+        });
+    }
+
+</script>
+
+<div class="content-wrapper">
+    <div class="container" >
+
+        <div class="row">
+            <div class="col-md-offset-3 col-md-3">
+                <h2 style="margin-top:70px;">signup</h2>
+                
+                <form role="form" action="~/Home/add_new_user">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input style="background-color: transparent; " type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input style="background-color: transparent; " onkeyup="fun(this.value)" type="text" id="email" class="form-control" name="email" required>
+                    </div>
+                    <div id="error"></div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input style="background-color: transparent; " type="password" class="form-control" name="password" required>
+                    </div>
+                    <div id="abc"></div>
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Remember me</label>
+                    </div>
+                    <button type="submit" name="abc" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/AdminLTE.css" rel="stylesheet" />
+@*<link href="~/plugin/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+<script src="~/plugin/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="~/plugin/jvectormap/jquery-jvectormap-world-mill-en.js"></script>*@
+
+<div class="content-wrapper">
+    <div class="container">
+        <section style="margin-top:70px;">
+            <div class="row">
+                
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <a href="~/Admin/show_ads?ads=Reprted">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-red"><i class="fa fa-flag-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Reported ads</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </a>
+                </div><!-- /.col -->
+                <!-- fix for small devices only -->
+                <div class="clearfix visible-sm-block"></div>
+                <a href="~/Admin/show_ads?ads=All">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-green"><i class="fa fa-files-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">All ads posted</span>
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                </a>
+                <div class="clearfix visible-sm-block"></div>
+                <a href="~/Admin/show_ads?ads=all_companies">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Companies</span>
+                                
+                            </div><!-- /.info-box-content -->
+                        </div><!-- /.info-box -->
+                    </div><!-- /.col -->
+                </a>
+
+            </div>
+        </section>
+    </div>
+</div>

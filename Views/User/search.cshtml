@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "search";
+    //var user = ViewBag.data;
+    IEnumerable<adminlte.Models.User> users = ViewBag.people;
+}
+<script>
+    
+    function fun(value) {
+       // var url = '~/User/search?s=' + value + '&from=json';
+        $.post("/User/search1", { s:value },
+        function (results) {
+            resultss(results);
+            
+            
+        });
+
+    }
+    function resultss(results) {
+        
+        var abc = '<div class="col-md-4"><div class="single-profile"><div class="media"><div class="pull-left"><img class="media-object" src="/Files/u';
+        var def = '.jpg" width="100" height="100"/></div><div class="media-body"><h4><a href="~/User/Index?id=';
+        var ghi = '</a></h4><h5>';
+        var jkl = '</h5></div></div></div></div>';
+        $("#results").empty();
+        $.each(results, function (index) {
+            $("#results").append(abc + results[index].Id + def + results[index].Id + '">' + results[index].name + ghi + results[index].about + jkl);
+        });
+        //for (x in value) {
+        //    $("#results").text(abc + x.Id + def + x.Id + '">' + x.name + ghi + x.about + jkl);
+        //}
+    }
+</script>
+<div class="content-wrapper">
+    <div class="container">
+        <section style="margin:40px auto">
+            <div class="row">
+                <div class="col-md-offset-3">
+                    <h2 style="">search People</h2>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:10px;">
+                <div class="col-md-offset-3 col-md-3">
+                    <form action="~/User/search">
+                        <input class="form-control" onkeyup="fun(this.value)" name="s" type="text" id="search" placeholder="search people" />
+                    </form>
+                </div>
+            </div>
+            <div id="results"></div>
+            @*@if (ViewBag.data != null) {
+                var users1 = ViewBag.data;
+            <div class="row">
+                <div id="results"></div>
+                @foreach (var user in users1)
+                {
+                <div class="col-md-4">
+                    <div class="single-profile">
+                        <div class="media">
+                            <div class="pull-left">
+                                <img class="media-object" src="@("/Files/u"+user.Id+".jpg")" width="100" height="100" />
+                            </div>
+                            <div class="media-body">
+                                <h4><a href="~/User/Index?id=@user.Id">@user.name</a></h4>
+                                <h5>@user.about</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                }
+            </div>
+            }*@
+        </section>
+    </div>
+</div>
