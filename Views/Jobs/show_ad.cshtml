@@ -253,7 +253,7 @@
 
                                             <a href="~/User/Index?id=@Model.posted_by">
                                                 <div class="single_comments">
-                                                    <img src="~/Files/@(user.Id+".jpg")" width="50" height="50" alt="" />
+                                                    <img src="@("/Files/u"+user.Id+".jpg")" width="50" height="50" alt="" />
                                                     <p>@user.name</p>
                                                     <div class="entry-meta small muted">
                                                         @user.user_location
