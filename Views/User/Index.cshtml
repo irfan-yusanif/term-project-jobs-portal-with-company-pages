@@ -26,7 +26,7 @@
                                         }
                                         
                                         <div class="col-xs-12 col-sm-4 text-center">
-                                            @if(ViewBag.isimage){
+                                            @if((string)ViewBag.isimage == "true"){
                                             <img src="@("/Files/u" + Model.Id + ".jpg")" width="200" height="200" alt="" class="center-block img-circle img-thumbnail img-responsive" />
 
                                             }
@@ -45,14 +45,20 @@
                                         <!--/col-->
                                         <!--/row-->
                                     </div>
-                                    <div class="row text-center">
+                                    @if (Session["user"] != null)
+                                    {
+                                        if ((int)Session["user"] == Model.Id)
+                                        {
+                                            <div class="row text-center">
                                         <h6>Upload  CV...</h6>
                                         <form action="../User/save_cv?id=@Model.Id&page=edit" method="post" enctype="multipart/form-data">
                                             <input type="file" name="image" class="text-center center-block well well-sm">
                                             <input type="submit" value="upload" />
                                         </form>
-                                        
                                     </div>
+                                        }
+                                    }
+                                    
                                 </section>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#home" role="tab" data-toggle="tab">Active ads</a></li>
