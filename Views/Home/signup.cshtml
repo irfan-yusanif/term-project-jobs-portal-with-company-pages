@@ -12,6 +12,7 @@
         $.getJSON(urll, function (data) {
             if (data) {
                 $("#error").text("This email is already taken");
+                $("submit").disabled();
             }
             else {
                 $("#error").text("");
@@ -46,7 +47,7 @@
                     <div class="checkbox">
                         <label><input type="checkbox"> Remember me</label>
                     </div>
-                    <button type="submit" name="abc" class="btn btn-default">Submit</button>
+                    <button type="submit" id="submit" name="abc" class="btn btn-default">Submit</button>
                 </form>
             </div>
         </div>

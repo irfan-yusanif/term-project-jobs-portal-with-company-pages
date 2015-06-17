@@ -1,9 +1,34 @@
-﻿@{
+﻿<script>
+    $(".container").click(function () {
+        alert("fgd");
+    });
+    var hash = {
+        'doc': 1,
+        'pdf': 1,
+    };
+
+    function check_extension(filename, submitId) {
+        var re = /\..+$/;
+        var ext = filename.match(re);
+        var submitEl = document.getElementById(submitId);
+        if (hash[ext]) {
+            submitEl.disabled = false;
+            return true;
+        } else {
+            alert("Invalid filename, please select another file");
+            submitEl.disabled = true;
+
+            return false;
+        }
+    }
+</script>
+@{
     ViewBag.Title = "Index";
     var active_ads = ViewBag.active_ads;
     var msg = TempData["message"];
     var companies = ViewBag.companies;
 }
+
 @model adminlte.Models.User
 
         <div class="content-wrapper">
@@ -41,21 +66,32 @@
                                         <!--/col-->
                                         <!--/row-->
                                     </div>
+                                                                        @if (ViewBag.is_file_exit == "true")
+{
+    <a target="_blank" href="@("/Files/cv"+Model.Id+".pdf")">
+        <div style="margin-top:20px;" class="col-sm-4 well">Download CV</div>
+    </a>
+}
                                     @if (Session["user"] != null)
                                     {
                                         if ((int)Session["user"] == Model.Id)
                                         {
                                             <div class="row text-center">
-                                        <h6>Upload  CV...</h6>
-                                        <form action="../User/save_cv?id=@Model.Id&page=edit" method="post" enctype="multipart/form-data">
-                                            <input type="file" name="image" class="text-center center-block well well-sm">
-                                            <input type="submit" value="upload" />
-                                        </form>
-                                    </div>
+                                                <h6>Upload  CV...</h6>
+                                                <form action="~/User/save_cv" onchange="check_extension(this.value)" method="post" enctype="multipart/form-data">
+                                                    <input type="file" name="cv" class="text-center center-block well well-sm">
+                                                    <input type="submit" value="upload" />
+                                                </form>
+                                            </div>
+                                            if (TempData["ext"] == "false")
+                                            {
+                                                <div>File not saved. You must upload pdf file</div>
+                                            }
+                                            
                                         }
                                     }
-                                    
-                                </section>
+
+</section><br /><br /><br /><br /><br />
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#home" role="tab" data-toggle="tab">Active ads</a></li>
                                     
