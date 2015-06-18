@@ -1,0 +1,72 @@
+﻿<script>
+    $(function () {
+        $("#email").keypress(function (e) {
+            var key = e.which;
+            var email = $("#email").val();
+            $("#error_msg").val("");
+            if (key == 13) {
+                $.post("/User/check_email", { s: email },
+                    function (results) {
+                        if (results) {
+
+                            $.post("/User/get_user_by_email", { email: email }, function (result) {
+                               
+                                var url = '/User/chat?to=' + result;
+                                window.location.href = url;
+
+                            })
+                        }
+                        else {
+
+                            $('#error_msg').val("Incorrect email");
+                            alert("incorrect email");
+                        }
+                    });
+            }
+        });
+    });
+</script>
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-10">
+
+                <div class="">
+                    <!--well panel panel-default-->
+                    <div class="panel-body">
+                        <section style="margin:30px auto">
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9">
+                                    @if (ViewBag.msg == "successfully_deleted")
+                                    {
+                                        <div class="alert alert-info alert-dismissable">
+                                            <a class="panel-close close" data-dismiss="alert">×</a>
+                                            <i class="fa fa-coffee"></i>
+                                            <h4>successfully deleted!</h4>
+                                        </div>
+                                    }
+
+                                    <div class="well">
+                                        <p>To whom you want to chat</p>
+                                        <input type="email" name="email" id="email" placeholder="Enter email" class="form-control" />
+                                        <div id="error_msg"></div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- Tab panes -->
+                        </section>
+                    </div>
+                    <!--/panel-body-->
+                </div>
+                <!--/panel-->
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+
+    </div>
+</div>

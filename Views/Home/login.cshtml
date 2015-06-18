@@ -27,6 +27,12 @@
                You must logged in to perform this action.
             </h4>
         }
+        else if (ViewBag.msg == "disabled")
+        {
+            <h4>
+                Your account has been disabled.
+            </h4>
+        }
     </div>
 }
 @using (Html.BeginForm("/check_login", "Home", FormMethod.Post))

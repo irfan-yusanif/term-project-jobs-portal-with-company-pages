@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "chat";
+}
+<script>
+    $(function () {
+        //var to = null;
+        //$("#load_here").load("/User/chat_get_email");
+        //$("#email").keypress(function (e) {
+        //    var key = e.which;
+        //    var email = $("#email").val();
+            
+        //    $("#error_msg").val("");
+        //    if (key == 13) {
+        //        alert("jkaldjf");
+        //        $.post("/User/check_email", { s: email },
+        //            function (results) {
+        //                if (results) {
+        //                    $.post("/User/get_user_by_email", { email: email }, function (results) {
+        //                        $.each(results, function (index) {
+        //                            to = results[index].Id;
+        //                            $("#load_here").load("/User/chat?to=" + to);
+
+        //                        });
+        //                    })
+        //                }
+        //                else {
+        //                    $("#error_msg").val("Incorrect email");
+        //                }
+        //            })
+        //    }
+        //});
+        var mymsg1 = '<div class="direct-chat-msg right"><div class="direct-chat-info clearfix"><span class="direct-chat-timestamp">';
+        var mymsg2 = '</span></div><img class="direct-chat-img" src="/Files/u';
+        var mymsg3 = '.jpg" alt="message user image"><div class="direct-chat-text">';
+        var mymsg4 = '</div></div>';
+
+        var ymsg1 = '<div class="direct-chat-msg"><div class="direct-chat-info clearfix"><span class="direct-chat-timestamp">';
+        var ymsg2 = '</span></div><img class="direct-chat-img" src="/Files/u';
+        var ymsg3 = '.jpg" alt="message user image"><div class="direct-chat-text">';
+        var ymsg4 = '</div></div>';
+        $("#msg").keypress(function (e) {
+            var key = e.which;
+            var msg = $("#msg").val();
+            var too = $("#to").val();
+
+            if (key == 13) {
+                
+                $.post('../User/save_message', { s: msg, to: too }, function (results) {
+                    if (results) {
+                        //results = JSON.stringify(results);
+                        // console.log(results);
+                        //alert(results[0].Id);
+                       var obj = $.parseJSON(JSON.stringify(results));
+                        // alert(obj.message);
+                       $("#post_msg").append(mymsg1 + obj.time + mymsg2 + obj.from + mymsg3 + obj.message + mymsg4);
+                        //$.each(results, function (index) {
+                        //    $("#post_msg").append(mymsg1 + results[index].time + mymsg2 + results[index].Id + mymsg3 + results[index].message + mymsg4);
+                        //});
+                    }
+                    else {
+                        $("#post_msg").append("error.messge not sent<br>");
+                    }
+                });
+            }
+        });
+    });
+</script>
+<link href="~/Content/AdminLTE.css" rel="stylesheet" />
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-10">
+
+                <div class="">
+                    <!--well panel panel-default-->
+                    <div class="panel-body">
+                        <section style="margin:30px auto">
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9">
+                                    @if (ViewBag.msg == "successfully_deleted")
+                                    {
+                                        <div class="alert alert-info alert-dismissable">
+                                            <a class="panel-close close" data-dismiss="alert">×</a>
+                                            <i class="fa fa-coffee"></i>
+                                            <h4>successfully deleted!</h4>
+                                        </div>
+                                    }
+                                    
+                                    <div class="box box-warning direct-chat direct-chat-warning">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title"> Chat</h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                <button class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts"><i class="fa fa-comments"></i></button>
+                                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+                                            <!-- Conversations are loaded here -->
+                                            <div class="direct-chat-messages">
+
+
+                                                <input type="hidden" id="to" value="1" />
+                                                <!-- Message. Default to the left -->
+                                            <div id="post_msg"></div>
+                                                
+
+                                            </div><!--/.direct-chat-messages-->
+                                            
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer">
+
+                                            <div class="input-group">
+                                                <input type="text" name="message" id="msg" placeholder="Type Message ..." class="form-control">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-warning btn-flat">Send</button>
+                                                </span>
+                                            </div>
+
+                                        </div><!-- /.box-footer-->
+                                    </div>
+
+                                    
+                                </div>
+                                </div>
+                        <!-- Tab panes -->
+                       </section>
+                    </div>
+                    <!--/panel-body-->
+                </div>
+                <!--/panel-->
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+
+    </div>
+</div>
+

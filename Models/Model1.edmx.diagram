@@ -18,6 +18,8 @@
         <AssociationConnector Association="Database1Model.FK_Follow_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="Database1Model.FK_Reviews_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="Database1Model.FK_Follow_ToTable_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Database1Model.Message" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Database1Model.Table" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
