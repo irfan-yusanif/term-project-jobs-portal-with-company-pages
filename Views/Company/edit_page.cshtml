@@ -11,7 +11,7 @@
                         <img src="~/Files/cc@(Model.Id+".jpg")" width="200" height="200" class=" img-thumbnail">
                     </a>
                     <h6>Upload  logo...</h6>
-                    <form action="../Company/save_img?id=@Model.Id&page=edit" method="post" enctype="multipart/form-data">
+                    <form action="~/Company/save_img?id=@Model.Id&page=edit" method="post" enctype="multipart/form-data">
                         <input type="file" name="image" class="text-center center-block well well-sm">
                         <input type="submit" value="upload" />
                     </form>
@@ -22,8 +22,8 @@
             <div class="col-md-8 col-sm-6">
                 @using (Html.BeginForm("update_page", "Company", FormMethod.Post))
                 {
-                    Html.HiddenFor(m => m.Id);
-                    Html.HiddenFor(m => m.made_by);
+                    @Html.HiddenFor(m => m.Id);
+                    @Html.HiddenFor(m => m.made_by);
 
                     <div class="form-group">
                         @Html.LabelFor(m => m.name)

@@ -1,7 +1,10 @@
 ﻿@{
     ViewBag.Title = "show_ad";
     var error = ViewBag.message;
-    int reported_count = ViewBag.reported;
+    int reported_count = 0;
+    if (ViewBag.reported != null) { 
+     reported_count = ViewBag.reported;
+        }
 }
 <style>
     table *{
