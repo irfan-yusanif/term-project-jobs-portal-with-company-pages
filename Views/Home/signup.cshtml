@@ -7,24 +7,28 @@
 @model adminlte.Models.User
 
 <script>
-    function fun(value) {
-        var urll = '/User/check_email?s=' + value;
-        $.getJSON(urll, function (data) {
-            if (data) {
-                $("#error").text("This email is already taken");
-                $("#submit").disabled();
-                $("#form").submit(function () {
-                    return false;
-                })
-                $("#form").find('input[type=submit]').attr('disabled', 'disabled');
-            }
-            else {
-                $("#error").text("");
-                $("#submit").enabled();
-            }
-        });
-    }
-
+    $(function () {
+        
+        var email = $("#email");
+        email.keyup(function () {
+            var value = email.val();
+            var urll = '/User/check_email?s=' + value;
+            $.getJSON(urll, function (data) {
+                if (data) {
+                    $("#error").text("This email is already taken");
+                    $('input[type="submit"]').attr('disabled', 'disabled');
+                  
+                }
+                else {
+                    $("#error").text("");
+                    $('input[type="submit"]').removeAttr('disabled');
+                }
+            });
+        })
+        function fun(value) {
+            
+        }
+    });
 </script>
 
 <div class="content-wrapper">
@@ -55,7 +59,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email address:</label>
-                        <input style="background-color: transparent; " onkeyup="fun(this.value)" type="text" id="email" class="form-control" name="email" required>
+                        <input style="background-color: transparent; " onkeyup="fun(this.value)" type="email" id="email" class="form-control" name="email" required>
                     </div>
                     <div id="error"></div>
                     <div class="form-group">
@@ -66,7 +70,7 @@
                     <div class="checkbox">
                         <label><input type="checkbox"> Remember me</label>
                     </div>
-                    <button type="submit" id="submit" name="abc" class="btn btn-default">Submit</button>
+                    <input type="submit" id="submit" name="abc" class="btn btn-default"/>
                 </form>
             </div>
         </div>

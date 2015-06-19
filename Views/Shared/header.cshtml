@@ -14,135 +14,141 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <div class="navbar-custom-menu">
-                    <form class="navbar-form navbar-left hidden-xs" role="search" id="search" action="~/Home/search">
-                        <div class="input-group">
-                            <div class="input-group-addon" style="margin:0;padding:0">
+                
+
+                    
+                    
+                    <div class="navbar-custom-menu">
+                        <form class="navbar-form navbar-left hidden-xs" role="search" id="search" action="~/Home/search">
+                            <div class="input-group">
+                                <div class="input-group-addon" style="margin:0;padding:0">
                                     <select id="select" class="form-control" name="type" style="border:none;margin-bottom:-4px;" form="search">
                                         @*<option>All</option>*@
                                         <option>Jobs</option>
                                         <option>Companies</option>
                                         <option>People</option>
                                     </select>
-                            </div>
-                            
+                                </div>
+
                                 <input type="text" name="str" id="search_box" class="form-control" id="navbar-search-input" placeholder="Search">
                             </div>
-                    </form>
+                        </form>
 
 
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        @*<li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li><!-- end message -->
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>*@
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        @*<li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                     
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
+                        <ul class="nav navbar-nav">
+                            <!-- Messages: style can be found in dropdown.less-->
+                            @*<li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 4 messages</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <!-- start message -->
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                            </div>
+                                            <h4>
+                                                Support Team
+                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li><!-- end message -->
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">See All Messages</a></li>
+                        </ul>
+                    </li>*@
+                            <!-- Notifications: style can be found in dropdown.less -->
+                            @*<li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 10 notifications</li>
+                            <li>
+
+                                <ul class="menu">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </li>*@
+                            <!-- Tasks: style can be found in dropdown.less -->
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="hidden-xs"><a href="~/Jobs/post_company_job_ad">Post  job </a></li>
+                            <li class="hidden-xs hidden-sm"><a href="~/Company/create_page">Create company Page</a></li>
+                            @if (Session["user"] == null)
+                            {
+                                <li class="btn-success"><a href="~/Home/login">Login</a></li>
+                                <li class="btn-danger"><a href="~/Home/signup">Join</a></li>
+                            }
+                            else
+                            {
+                                <li class="dropdown user user-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <img src="@("/Files/u"+Session["user"]+".jpg")" class="user-image" alt="User Image" />
+                                        <span class="hidden-xs">@Session["user_name"]</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- User image -->
+                                        <li class="user-header">
+                                            <img src="@("/Files/u"+Session["user"]+".jpg")" class="img-circle" alt="User Image" />
+                                            <p>
+                                                @Session["user_name"] - @Session["about"]
+                                                <small>Member since: @Session["member_since"]</small>
+                                            </p>
+                                        </li>
+                                        <!-- Menu Body -->
+                                        <li class="user-body">
+                                            <div class="col-xs-4 text-center">
+                                                @if (Session["type"] == "admin")
+                                                {
+                                                    <a href="~/Admin/Index?id=@Session["user"]">Admin panel</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="~/User/Index?id=@Session["user"]#notifications">Notifications</a>
+                                                }
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="~/User/chat">chat</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                @*<a href="~/User/edit_profile?id=@Session["user"]">Edit profile</a>*@
+                                                @Html.ActionLink("Edit Profile", "../User/edit_profile", new { id = Session["user"] })
+
+                                            </div>
+                                        </li>
+                                        <!-- Menu Footer-->
+                                        <li class="user-footer">
+                                            <div class="pull-left">
+                                                @*@Html.ActionLink("Profile", "../User/Index", new { id = Session["user"] }, new { @class = "btn btn_default btn-flat" })*@
+                                                @{int id = (int)Session["user"];}
+                                                <a href="~/User?id=@id" class="btn btn-default btn-flat">Profile</a>
+                                            </div>
+                                            <div class="pull-right">
+                                                <a href="~/Home/logout" class="btn btn-default btn-flat">Sign out</a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>*@
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        
-                        <!-- User Account: style can be found in dropdown.less -->
-                        
-                        <li class="hidden-xs"><a href="~/Jobs/post_company_job_ad">Post  job </a></li>
-                        <li class="hidden-xs hidden-sm"><a href="~/Company/create_page">Create company Page</a></li>
-                        @if (Session["user"] == null) {
-                        <li class="btn-success"><a href="~/Home/login">Login</a></li>
-                        <li class="btn-danger"><a href="~/Home/signup">Join</a></li>
-                        }
-                        else
-                        {
-                          <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="@("/Files/u"+Session["user"]+".jpg")" class="user-image" alt="User Image" />
-                                <span class="hidden-xs">@Session["user_name"]</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="@("/Files/u"+Session["user"]+".jpg")" class="img-circle" alt="User Image" />
-                                    <p>
-                                        @Session["user_name"] - @Session["about"]
-                                        <small>Member since: @Session["member_since"]</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="col-xs-6 text-center">
-                                                                                @if (Session["type"] == "admin")
-                                        {
-                                            <a href="~/Admin/Index?id=@Session["user"]">Admin panel</a>
-                                        }
-                                                                                else
-                                                                                {
-                                                                                    <a href="~/User/Index?id=@Session["user"]#notifications">Notifications</a>
-                                                                                }
-                                               </div>
-                                    <div class="col-xs-6 text-center">
-                                        @*<a href="~/User/edit_profile?id=@Session["user"]">Edit profile</a>*@
-                                        @Html.ActionLink("Edit Profile", "../User/edit_profile", new { id = Session["user"] })
-                                        
-                                    </div>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        @*@Html.ActionLink("Profile", "../User/Index", new { id = Session["user"] }, new { @class = "btn btn_default btn-flat" })*@
-                                        @{int id = (int)Session["user"];}
-                                        <a href="~/User?id=@id" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="~/Home/logout" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        }
-                    </ul>
-                </div>
-            </nav>
+                            }
+                        </ul>
+                    </div>
+</nav>
         </header>
         <!--/add aside here!-->
         <div class="main-sidebar">

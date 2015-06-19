@@ -38,11 +38,14 @@
         var ymsg2 = '</span></div><img class="direct-chat-img" src="/Files/u';
         var ymsg3 = '.jpg" alt="message user image"><div class="direct-chat-text">';
         var ymsg4 = '</div></div>';
+        function parseJsonDate(jsonDateString) {
+            return new Date(parseInt(jsonDateString.replace('/Date(', '')));
+        }
         $("#msg").keypress(function (e) {
             var key = e.which;
             var msg = $("#msg").val();
             var too = $("#to").val();
-
+            
             if (key == 13) {
                 
                 $.post('../User/save_message', { s: msg, to: too }, function (results) {
@@ -50,12 +53,14 @@
                         //results = JSON.stringify(results);
                         // console.log(results);
                         //alert(results[0].Id);
-                       var obj = $.parseJSON(JSON.stringify(results));
+                        var obj = $.parseJSON(JSON.stringify(results));
+                        
+                        //obj.time = new Date(parseInt(obj.time));
+                        obj.time = parseJsonDate(obj.time);
                         // alert(obj.message);
                        $("#post_msg").append(mymsg1 + obj.time + mymsg2 + obj.from + mymsg3 + obj.message + mymsg4);
-                        //$.each(results, function (index) {
-                        //    $("#post_msg").append(mymsg1 + results[index].time + mymsg2 + results[index].Id + mymsg3 + results[index].message + mymsg4);
-                        //});
+
+                       $("#msg").val("");
                     }
                     else {
                         $("#post_msg").append("error.messge not sent<br>");
@@ -101,8 +106,40 @@
                                             <div class="direct-chat-messages">
 
 
-                                                <input type="hidden" id="to" value="1" />
+                                                <input type="hidden" id="to" value="@ViewBag.to" />
                                                 <!-- Message. Default to the left -->
+                                            @if (ViewBag.messages != null)
+                                            {
+                                                var msg = ViewBag.messages;
+                                                foreach (var ms in msg)
+                                                {
+                                                    int id = (int)Session["user"];
+                                                    if (ms.from == id)
+                                                    {
+                                                        <div class="direct-chat-msg right">
+                                                            <div class="direct-chat-info clearfix">
+                                                                <span class="direct-chat-timestamp ">@ms.time</span>
+                                                            </div><!-- /.direct-chat-info -->
+                                                            <img class="direct-chat-img" src="@("/Files/u"+@ms.from+".jpg")" alt="image"><!-- /.direct-chat-img -->
+                                                            <div class="direct-chat-text">
+                                                                @ms.message
+                                                            </div><!-- /.direct-chat-text -->
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="direct-chat-msg ">
+                                                            <div class="direct-chat-info clearfix">
+                                                                <span class="direct-chat-timestamp pull-left">@ms.time</span>
+                                                            </div><!-- /.direct-chat-info -->
+                                                            <img class="direct-chat-img" src="@("/Files/u"+@ms.from+".jpg")" alt="image"><!-- /.direct-chat-img -->
+                                                            <div class="direct-chat-text">
+                                                                @ms.message
+                                                            </div><!-- /.direct-chat-text -->
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                             <div id="post_msg"></div>
                                                 
 
